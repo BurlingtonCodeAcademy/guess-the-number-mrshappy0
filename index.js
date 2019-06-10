@@ -45,19 +45,11 @@ async function start() {
 }
 
 function defineLow(lowerBound, guess) {
-	return lowerBound + guess;
-}
-
-function defineLow2(lowerBound, guess) {
-	return lowerBound + guess / 2;
+	return guess - 1;
 }
 
 function defineHigh(higherBound, guess) {
-	return higherBound - guess;
-}
-
-function defineHigh2(higherBound, guess) {
-	return higherBound - guess / 2;
+	return guess + 1;
 }
 
 function average(higherBound, lowerBound) {
