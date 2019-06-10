@@ -16,29 +16,30 @@ async function start() {
 	console.log(
 		"Let's play a game where you (human) make up a number and I (computer) try to guess it."
 	);
-	let yesOrNo = await ask("Is it " + guess + "? ");
+  let yesOrNo = await ask("Is it " + guess + "? ");
+  let yesOrNoFinal = yesOrNo.toLowerCase();
 
-	while (yesOrNo !== "yes") {
+	while (yesOrNoFinal !== "yes") {
 		console.log("You entered: " + yesOrNo);
 
-		let lowOrHigh = await ask("Is it lower or higher? ");
+    let lowOrHigh = await ask("Is it lower or higher? ");
+    let lowOrHighFinal = lowOrHigh.toLowerCase();
 		console.log("You entered: " + lowOrHigh);
-		if (yesOrNo === "yes") {
+		if (yesOrNoFinal === "yes") {
 			console.log("winner, winner, chicken dinner!");
 			process.exit();
 		}
-		if (yesOrNo !== "yes" && lowOrHigh === "higher") {
+		if (yesOrNoFinal !== "yes" && lowOrHighFinal === "higher") {
 			lowerBound = defineLow(lowerBound, guess);
 			guess = average(higherBound, lowerBound);
-			//console.log(guess, higherBound, lowerBound);
-		} else if (yesOrNo !== "yes" && lowOrHigh === "lower") {
+		} else if (yesOrNoFinal !== "yes" && lowOrHighFinal === "lower") {
 			higherBound = defineHigh(higherBound, guess);
 			guess = average(higherBound, lowerBound);
-			//console.log(guess, higherBound, lowerBound);
 		} else {
 			console.log("What's wrong with you human!? Try again!");
 		}
-		yesOrNo = await ask("Is it " + guess + "? ");
+    yesOrNo = await ask("Is it " + guess + "? ");
+    yesOrNo = yesOrNo.toLowerCase();
 	}
 	console.log("winner, winner, chicken dinner!");
 	process.exit();
@@ -54,5 +55,5 @@ function defineHigh(higherBound, guess) {
 
 function average(higherBound, lowerBound) {
 	let number = (higherBound + lowerBound) / 2;
-	return Math.ceil(number);
+	return Math.floor(number);
 }
